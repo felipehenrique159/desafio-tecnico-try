@@ -1,0 +1,4 @@
+.env
+infra/mysql_data
+infra/volumes/mysql_data
+.idea
