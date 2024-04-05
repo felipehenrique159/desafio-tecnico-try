@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Enum\ComissaoEnumerador;
+use App\Http\Resources\VendedoresResource;
 use App\Repositories\VendedorRepository;
 
 class VendedorService
@@ -17,5 +18,11 @@ class VendedorService
             $request['nome'],
             $request['email']
         );
+    }
+
+    public function listarTodosComComissao()
+    {
+        $vendedores = $this->vendedorRepository->listarTodosComComissao();
+        return VendedoresResource::collection($vendedores);
     }
 }

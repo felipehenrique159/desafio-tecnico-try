@@ -17,4 +17,14 @@ class Vendedor extends Model
         'nome',
         'email'
     ];
+
+    public function comissoes()
+    {
+        return $this->hasMany(Vendas::class, 'id_vendedor', 'id');
+    }
+
+    public function getComissaoAttribute()
+    {
+        return $this->comissoes()->sum('comissao');
+    }
 }

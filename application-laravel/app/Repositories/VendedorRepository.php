@@ -14,4 +14,9 @@ class VendedorRepository implements VendedorRepositoryInterface
             'email' => $email
         ]);
     }
+
+    public function listarTodosComComissao()
+    {
+        return Vendedor::with('comissoes')->get();
+    }
 }

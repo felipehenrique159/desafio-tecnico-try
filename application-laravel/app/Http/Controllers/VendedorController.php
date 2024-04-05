@@ -20,4 +20,11 @@ class VendedorController extends Controller
 
         return response()->json($vendedor, 201);
     }
+
+    public function listarTodosComComissao(): JsonResponse
+    {
+        $vendedores = $this->vendedorService->listarTodosComComissao();
+
+        return response()->json($vendedores, 200);
+    }
 }
