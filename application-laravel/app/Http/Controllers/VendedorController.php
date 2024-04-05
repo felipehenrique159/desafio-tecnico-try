@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Vendedor\CriarRequest;
 use App\Services\VendedorService;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class VendedorController extends Controller
 {
@@ -11,7 +12,7 @@ class VendedorController extends Controller
         protected readonly VendedorService $vendedorService
     ) {}
 
-    public function criar(Request $request)
+    public function criar(CriarRequest $request): JsonResponse
     {
         $vendedor = $this->vendedorService->criar(
             $request->all()
