@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Enum\ComissaoEnumerador;
+use App\Http\Resources\ListarVendasPorVendedorResource;
 use App\Http\Resources\NovaVendaResource;
 use App\Repositories\VendasRepository;
 
@@ -29,5 +30,12 @@ class VendasService
     {
         $comissao = $valorDaVenda * (ComissaoEnumerador::PADRAO / 100);
         return number_format($comissao, 2);
+    }
+
+    public function listarVendasPorVendedor(int $id)
+    {
+        $vendas = $this->vendasRepository->listarVendasPorVendedor($id);
+
+        return ListarVendasPorVendedorResource::collection($vendas);
     }
 }

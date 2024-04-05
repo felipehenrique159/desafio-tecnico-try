@@ -17,4 +17,9 @@ class VendasRepository implements VendasRepositoryInterface
             'data_da_venda' => Carbon::now()
         ]);
     }
+
+    public function listarVendasPorVendedor(int $idVendedor)
+    {
+        return Vendas::with('vendedor')->where('id_vendedor', $idVendedor)->get();
+    }
 }

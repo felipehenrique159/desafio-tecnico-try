@@ -19,5 +19,6 @@ Route::prefix('vendedor')->group(function () {
 Route::prefix('vendas')->group(function () {
     Route::controller(VendasController::class)->group(function () {
         Route::post('/', 'criarVenda');
+        Route::get('/vendedor', 'listarVendasPorVendedor');
     });
 });

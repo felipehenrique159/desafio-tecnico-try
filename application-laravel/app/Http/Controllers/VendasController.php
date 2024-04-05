@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Vendas\CriarVendaRequest;
+use App\Http\Requests\Vendas\ListarVendasPorVendedorRequest;
 use App\Services\VendasService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class VendasController extends Controller
 {
@@ -20,5 +20,14 @@ class VendasController extends Controller
         );
 
         return response()->json($venda, 201);
+    }
+
+    public function listarVendasPorVendedor(ListarVendasPorVendedorRequest $request): JsonResponse
+    {
+        $vendasPorVendedor = $this->vendasService->listarVendasPorVendedor(
+            $request->input('id')
+        );
+
+        return response()->json($vendasPorVendedor, 200);
     }
 }
