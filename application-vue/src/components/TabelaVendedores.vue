@@ -11,8 +11,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-if="vendedores.length == 0">Sem vendedores cadastrados...</tr>
-      <tr v-for="vendedor in vendedores" :key="vendedor.id">
+      <tr v-if="this.$store.state.vendedores.length == 0">Sem vendedores cadastrados...</tr>
+      <tr v-for="vendedor in this.$store.state.vendedores" :key="vendedor.id">
         <td>{{vendedor.nome}}</td>
         <td>{{vendedor.email}}</td>
         <td>
@@ -37,17 +37,11 @@ import api from '../Services/Api'
 import store from '../store'
 
 export default {
-  data() {
-      return {
-        vendedores: []
-      };
-  },
   methods: {
     async buscarTodosVendedoresComComissao(){
       let vendedores = await api.get('api/vendedor')
       if (vendedores.data.length > 0) {
-        this.vendedores = vendedores.data
-        store.commit('storeVendedores', this.vendedores)
+        store.commit('storeVendedores', vendedores.data)
       }
     }
   },

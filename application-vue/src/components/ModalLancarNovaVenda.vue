@@ -37,6 +37,8 @@
 <script>
 import api from '../Services/Api'
 import tratarMensagensErro from '../utils/errosValidacao';
+import Swal from 'sweetalert2';
+import { mapActions } from 'vuex';
 
 export default {
   data() {
@@ -46,12 +48,26 @@ export default {
       };
   },
   methods: {
+    ...mapActions(['buscarTodosVendedoresComComissao']),
     async lancarVenda() {
       try {
         await api.post('api/vendas', {
           id_vendedor : this.idVendedor,
           valor_da_venda : this.valorVenda
         })
+
+        Swal.fire({
+          title: "Cadastrada com sucesso!",
+          text: "Venda cadastrada com sucesso!",
+          icon: "success"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.buscarTodosVendedoresComComissao();
+            this.idVendedor = null,
+            this.valorVenda = null
+          }
+        });
+
       } catch (error) {
         tratarMensagensErro(error)
       }
