@@ -11,19 +11,19 @@
         </div>
         <div class="modal-body">
           <form @submit.prevent="salvarVendedor">
-            <div class="form-group">
-              <label for="nome">Nome:</label>
-              <input type="text" class="form-control" id="nome" v-model="nome" required>
-            </div>
-            <div class="form-group">
-              <label for="email">E-mail:</label>
-              <input type="email" class="form-control" id="email" v-model="email" required>
-            </div>
+              <div class="form-group">
+                  <label for="nome">Nome:</label>
+                  <input type="text" class="form-control" id="nome" v-model="nome" required>
+              </div>
+              <div class="form-group">
+                  <label for="email">E-mail:</label>
+                  <input type="email" class="form-control" id="email" v-model="email" required>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                  <button type="submit" class="btn btn-primary">Salvar</button>
+              </div>
           </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-          <button type="button" class="btn btn-primary" @click="salvarVendedor">Salvar</button>
         </div>
       </div>
     </div>
@@ -44,7 +44,6 @@ export default {
   },
   methods: {
     async salvarVendedor() {
-
       const vendedor = {
           nome : this.nome,
           email : this.email

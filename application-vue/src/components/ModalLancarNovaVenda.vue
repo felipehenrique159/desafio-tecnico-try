@@ -22,12 +22,12 @@
               <label for="email">Valor da venda:</label>
               <input v-model="valorVenda" type="number" class="form-control" required>
             </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+              <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
           </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-          <button type="button" class="btn btn-primary" @click="lancarVenda">Salvar</button>
-        </div>
+      </div>
       </div>
     </div>
   </div>
