@@ -12,15 +12,15 @@
         <div class="modal-body">
           <form @submit.prevent="lancarVenda">
             <div class="form-group">
-              <label for="nome">Vendedor:</label>
+              <label>Vendedor:</label>
               <select class="form-control" v-model="idVendedor" required>
                 <option value="">-- Selecione um vendedor --</option>
                 <option v-for="item in this.$store.state.vendedores" :key="item.id" :value="item.id">{{ item.nome }} - {{ item.email }}</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="email">Valor da venda:</label>
-              <input v-model="valorVenda" type="number" class="form-control" required>
+              <label>Valor da venda:</label>
+              <input v-model.lazy="valorVenda" v-money="money" type="text" class="form-control" required>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import {VMoney} from 'v-money'
 import api from '../Services/Api'
 import tratarMensagensErro from '../utils/errosValidacao';
 import Swal from 'sweetalert2';
@@ -44,7 +45,13 @@ export default {
   data() {
       return {
         idVendedor: null,
-        valorVenda: null
+        valorVenda: null,
+        money: {
+          decimal: '.',
+          thousands: ',',
+          precision: 2,
+          masked: false
+        }
       };
   },
   methods: {
@@ -53,7 +60,7 @@ export default {
       try {
         await api.post('api/vendas', {
           id_vendedor : this.idVendedor,
-          valor_da_venda : this.valorVenda
+          valor_da_venda : this.valorVenda.replace(',', '')
         })
 
         Swal.fire({
@@ -72,6 +79,9 @@ export default {
         tratarMensagensErro(error)
       }
     }
+  },
+  directives: {
+    money: VMoney
   }
 }
 </script>
