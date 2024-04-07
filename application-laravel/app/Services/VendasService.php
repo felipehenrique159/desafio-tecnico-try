@@ -10,12 +10,15 @@ use App\Repositories\VendasRepository;
 class VendasService
 {
     public function __construct(
-        private readonly VendasRepository $vendasRepository
+        private readonly VendasRepository $vendasRepository,
+        private readonly ComissaoService $comissaoService
     ) {}
 
     public function novaVenda(array $request)
     {
-        $comissaoDaVenda = $this->calcularComissaoDaVenda($request['valor_da_venda']);
+        $comissaoDaVenda = $this->comissaoService->calcularComissao(
+            ComissaoEnumerador::PADRAO, $request['valor_da_venda']
+        );
 
         $venda = $this->vendasRepository->salvar(
             $request['id_vendedor'],
@@ -23,13 +26,7 @@ class VendasService
             $request['valor_da_venda']
         );
 
-        return new NovaVendaResource($venda);
-    }
-
-    private function calcularComissaoDaVenda(float $valorDaVenda): float
-    {
-        $comissao = $valorDaVenda * (ComissaoEnumerador::PADRAO / 100);
-        return number_format($comissao, 2, '.', '');
+        return NovaVendaResource::make($venda);
     }
 
     public function listarVendasPorVendedor(int $id)
