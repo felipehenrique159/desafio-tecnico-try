@@ -6,7 +6,7 @@ use App\Models\Vendedor;
 
 interface VendedorRepositoryInterface
 {
-    public function criarNovo(string $nome, string $email): Vendedor;
+    public function salvarNovoVendedor(string $nome, string $email): Vendedor;
 
-    public function listarTodosComComissao();
+    public function listarTodosComComissao(): array;
 }

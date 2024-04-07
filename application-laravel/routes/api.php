@@ -11,7 +11,7 @@ Route::get('/user', function (Request $request) {
 
 Route::prefix('vendedor')->group(function () {
     Route::controller(VendedorController::class)->group(function () {
-        Route::post('/', 'criar');
+        Route::post('/', 'criarVendedor');
         Route::get('/', 'listarTodosComComissao');
     });
 });

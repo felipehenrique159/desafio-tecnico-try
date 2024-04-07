@@ -12,9 +12,9 @@ class VendedorController extends Controller
         protected readonly VendedorService $vendedorService
     ) {}
 
-    public function criar(CriarRequest $request): JsonResponse
+    public function criarVendedor(CriarRequest $request): JsonResponse
     {
-        $vendedor = $this->vendedorService->criar(
+        $vendedor = $this->vendedorService->criarVendedor(
             $request->all()
         );
 

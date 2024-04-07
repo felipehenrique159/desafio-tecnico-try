@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Vendas\CriarVendaRequest;
 use App\Http\Requests\Vendas\ListarVendasPorVendedorRequest;
+use App\Services\ComissaoService;
 use App\Services\VendasService;
 use Illuminate\Http\JsonResponse;
 
 class VendasController extends Controller
 {
     public function __construct(
-        protected readonly VendasService $vendasService
+        private readonly VendasService $vendasService,
+        private readonly ComissaoService $comissaoService
     ) {}
 
     public function criarVenda(CriarVendaRequest $request): JsonResponse

@@ -18,9 +18,9 @@ class VendasRepository implements VendasRepositoryInterface
         ]);
     }
 
-    public function listarVendasPorVendedor(int $idVendedor)
+    public function listarVendasPorVendedor(int $idVendedor): array
     {
-        return Vendas::with('vendedor')->where('id_vendedor', $idVendedor)->get();
+        return Vendas::with('vendedor')->where('id_vendedor', $idVendedor)->get()->toArray();;
     }
 
     public function buscarTotalVendasDiaAtual(): float

@@ -12,9 +12,9 @@ class VendedorService
         private readonly VendedorRepository $vendedorRepository
     ) {}
 
-    public function criar(array $request)
+    public function criarVendedor(array $request)
     {
-        return $this->vendedorRepository->criarNovo(
+        return $this->vendedorRepository->salvarNovoVendedor(
             $request['nome'],
             $request['email']
         );
@@ -23,6 +23,7 @@ class VendedorService
     public function listarTodosComComissao()
     {
         $vendedores = $this->vendedorRepository->listarTodosComComissao();
+
         return VendedoresResource::collection($vendedores);
     }
 }

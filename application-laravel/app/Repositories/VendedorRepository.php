@@ -7,7 +7,7 @@ use App\Models\Vendedor;
 
 class VendedorRepository implements VendedorRepositoryInterface
 {
-    public function criarNovo(string $nome, string $email): Vendedor
+    public function salvarNovoVendedor(string $nome, string $email): Vendedor
     {
         return Vendedor::create([
             'nome' => $nome,
@@ -15,8 +15,8 @@ class VendedorRepository implements VendedorRepositoryInterface
         ]);
     }
 
-    public function listarTodosComComissao()
+    public function listarTodosComComissao(): array
     {
-        return Vendedor::with('comissoes')->get();
+        return Vendedor::with('comissoes')->get()->toArray();
     }
 }
