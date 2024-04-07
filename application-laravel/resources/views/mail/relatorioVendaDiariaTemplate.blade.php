@@ -1,0 +1,1 @@
+O dia de hoje foi realizado vendas com um total de R$ {{ $totalVendas }}

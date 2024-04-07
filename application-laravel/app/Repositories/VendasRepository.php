@@ -22,4 +22,12 @@ class VendasRepository implements VendasRepositoryInterface
     {
         return Vendas::with('vendedor')->where('id_vendedor', $idVendedor)->get();
     }
+
+    public function buscarTotalVendasDiaAtual(): float
+    {
+        return Vendas::whereDate(
+            'data_da_venda',
+            Carbon::today()->format('Y-m-d')
+        )->sum('valor_da_venda');
+    }
 }
