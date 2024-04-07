@@ -29,7 +29,7 @@ class VendasService
     private function calcularComissaoDaVenda(float $valorDaVenda): float
     {
         $comissao = $valorDaVenda * (ComissaoEnumerador::PADRAO / 100);
-        return number_format($comissao, 2);
+        return number_format($comissao, 2, '.', '');
     }
 
     public function listarVendasPorVendedor(int $id)
