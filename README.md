@@ -3,6 +3,7 @@
 # Ambiente configurado em docker, Vue JS / Laravel
 
 ## Ajustes e configurações para contêiner do Vuejs:
+
 - Vá ate a pasta da aplicação vue js chamada 'application-vue' copie o .env.local.example de exemplo para .env.local, o valor da única variável do arquivo deve conter a mesma porta da aplicação laravel, por padrão deixei 8000
 
 ## Ajustes e configurações para contêiner do laravel:
@@ -26,16 +27,17 @@
 
 ### Testes Unitários
 
-- Para execução dos testes unitários, acesse o contêiner 'laravel' e execute o comando abaixo para executar os 2 arquivos de teste:
+- Para execução dos testes unitários, acesse o contêiner 'laravel' e execute o comando abaixo para executar os 3 arquivos de teste:
   - php vendor/bin/phpunit tests/Unit
 
 ### Uso de Command, tarefa agendada e envio de e-mails
+
 - A aplicação possui com um command para envio de e-mail contendo o relatório das vendas do dia atual, ele está configurado para execução todos os dias ás 18h
+- Como estamos testando localmente, precisamos acessar o contêiner da nossa aplicação laravel e executar o que ficará ouvindo os agendamentos e os executando:
 
- - Como estamos testando localmente, precisamos acessar o contêiner da nossa aplicação laravel e executar o que ficará ouvindo os agendamentos e os executando:
-   - php artisan schedule:work
-
+  - php artisan schedule:work
 - É possivel tambem executarmos a command para envio do e-mail a qualquer hora utilizando o comando:
+
   - php artisan relatorio:vendas
 
 ### Sobre as aplicações
@@ -65,6 +67,7 @@ Aplicação consiste em um sistema de gestão de vendas. composta de um front-en
 	"email" : "teste@hotmail.com"
 }
 ```
+
 ### GET localhost:8000/api/vendedor
 
 - Exibir todos vendedores
@@ -80,6 +83,10 @@ Aplicação consiste em um sistema de gestão de vendas. composta de um front-en
 	"valor_da_venda": "30.60"
 }
 ```
+
 ### GET localhost:8000/api/vendas/vendedor?id=1
 
 - Exibir todas vendas por id de vendedor
+
+
+Além desta Doc, irei disponibilizar um arquivo exportado do insomnia para facilitar o processo de testes contido na pasta (doc_insomnia), basta apenas restaurar no insomnia e utilizar os endpoints.
