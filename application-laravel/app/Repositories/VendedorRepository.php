@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\VendedorRepositoryInterface;
 use App\Models\Vendedor;
+use Illuminate\Database\Eloquent\Collection;
 
 class VendedorRepository implements VendedorRepositoryInterface
 {
@@ -15,8 +16,8 @@ class VendedorRepository implements VendedorRepositoryInterface
         ]);
     }
 
-    public function listarTodosComComissao(): array
+    public function listarTodosComComissao(): Collection
     {
-        return Vendedor::with('comissoes')->get()->toArray();
+        return Vendedor::with('comissoes')->get();
     }
 }

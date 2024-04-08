@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Interfaces\VendasRepositoryInterface;
 use App\Models\Vendas;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 
 class VendasRepository implements VendasRepositoryInterface
 {
@@ -18,9 +19,9 @@ class VendasRepository implements VendasRepositoryInterface
         ]);
     }
 
-    public function listarVendasPorVendedor(int $idVendedor): array
+    public function listarVendasPorVendedor(int $idVendedor): Collection
     {
-        return Vendas::with('vendedor')->where('id_vendedor', $idVendedor)->get()->toArray();;
+        return Vendas::with('vendedor')->where('id_vendedor', $idVendedor)->get();
     }
 
     public function buscarTotalVendasDiaAtual(): float
