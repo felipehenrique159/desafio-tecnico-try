@@ -31,4 +31,10 @@ RUN docker-php-ext-enable imagick
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+RUN mkdir /var/www/storage
+RUN chown -R root:www-data /var/www/storage
+RUN chmod u+rwx,g+rx,o+rx /var/www/storage
+
+RUN chmod -R 777 /var/www
+
 WORKDIR /var/www
