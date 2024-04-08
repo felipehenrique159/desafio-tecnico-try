@@ -10,7 +10,7 @@ class ListarVendasPorVendedorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|integer'
+            'id' => 'required|integer|exists:vendedor,id'
         ];
     }
 
@@ -18,7 +18,8 @@ class ListarVendasPorVendedorRequest extends FormRequest
     {
         return [
             'id.required' => 'id é obrigatório.',
-            'id.integer' => 'id deve ser inteiro.'
+            'id.integer' => 'id deve ser inteiro.',
+            'id.exists' => 'id do vendedor não existe.'
         ];
     }
 
