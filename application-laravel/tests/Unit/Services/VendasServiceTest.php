@@ -8,6 +8,7 @@ use App\Models\Vendas;
 use App\Repositories\VendasRepository;
 use App\Services\ComissaoService;
 use App\Services\VendasService;
+use Illuminate\Database\Eloquent\Collection;
 use PHPUnit\Framework\TestCase;
 
 class VendasServiceTest extends TestCase
@@ -66,18 +67,19 @@ class VendasServiceTest extends TestCase
 
     public function testVendasPorVendedor()
     {
+        $colecao = new Collection();
+        $colecao->push([
+            'id' => 1,
+            'nome' => 'Teste',
+            'email' => 'teste@teste.com',
+            'comissao' => 100.00,
+            'valor_da_venda' => 1000.00,
+            'data_da_venda' => '2024-04-07 17:52:24'
+        ]);
+
         $this->vendasRepositoryMock->expects($this->once())
             ->method('listarVendasPorVendedor')
-            ->willReturn([
-                [
-                    'id' => 1,
-                    'nome' => 'Teste',
-                    'email' => 'teste@teste.com',
-                    'comissao' => 100.00,
-                    'valor_da_venda' => 1000.00,
-                    'data_da_venda' => '2024-04-07 17:52:24'
-                ],
-            ]);
+            ->willReturn($colecao);
 
         $responseArray = $this->vendasService->listarVendasPorVendedor(1);
 

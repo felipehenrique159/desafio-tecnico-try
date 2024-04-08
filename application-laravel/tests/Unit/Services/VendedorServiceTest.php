@@ -6,6 +6,7 @@ use App\Http\Resources\VendedoresResource;
 use App\Models\Vendedor;
 use App\Repositories\VendedorRepository;
 use App\Services\VendedorService;
+use Illuminate\Database\Eloquent\Collection;
 use PHPUnit\Framework\TestCase;
 
 class VendedorServiceTest extends TestCase
@@ -53,15 +54,17 @@ class VendedorServiceTest extends TestCase
 
     public function testListarTodosComComissao()
     {
+        $colecao = new Collection();
+
+        $colecao->push([
+            'id' => 1,
+            'nome' => 'Teste',
+            'email' => 'teste@teste.com'
+        ]);
+
         $this->vendedorRepositoryMock->expects($this->once())
             ->method('listarTodosComComissao')
-            ->willReturn([
-                [
-                    'id' => 1,
-                    'nome' => 'Teste',
-                    'email' => 'teste@teste.com'
-                ],
-            ]);
+            ->willReturn($colecao);
 
         $responseArray = $this->vendedorService->listarTodosComComissao();
 
